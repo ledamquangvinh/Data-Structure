@@ -1,4 +1,4 @@
-package NTBao.src;
+package Array;
 
 public class Demo1 {
 public static void ThreeBiggestNum(Integer[] inputArr) {
