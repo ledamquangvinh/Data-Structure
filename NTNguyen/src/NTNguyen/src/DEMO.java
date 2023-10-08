@@ -1,8 +1,10 @@
+package NTNguyen.src;
+
 import java.util.Arrays;
 
 class DEMO
 {
-    static void print3largest(int arr[])
+    static void print3largest(int[] arr)
     {
         int i, first, second, third;
 
@@ -33,9 +35,9 @@ class DEMO
         System.out.println("The 3 largest elements are: " + first + " " + second + " " + third);
     }
 
-    static void find_2nd_largest (int arr[])
+    static void find_2nd_largest (int[] arr)
     {
-        int i, first, second;
+        int i;
 
         if (arr.length < 2) {
             System.out.println("Invalid Input");
@@ -58,8 +60,7 @@ class DEMO
 
     public static void main(String[] args)
     {
-        int arr[] = {25, 39,45, 17, 51, 7, 26,0, 1, 5, 0};
-        int length = arr.length;
+        int[] arr = {25, 39,45, 17, 51, 7, 26,0, 1, 5, 0};
         print3largest(arr);
         find_2nd_largest(arr);
     }
