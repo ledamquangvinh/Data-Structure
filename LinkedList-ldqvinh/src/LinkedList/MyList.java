@@ -56,6 +56,23 @@ public class MyList {
         this.length++;
     }
 
+    public void addNode(Node newNode) {
+        Node currNode = this.head;
+        if(this.head == null) {
+            this.head = newNode;
+            newNode.next = null;
+            this.length++;
+            return;
+        }
+        while(currNode.next != null) {
+            currNode = currNode.next;
+        }
+
+        currNode.next = newNode;
+        newNode.next = null;
+        this.length++;
+    }
+
     public void addNodeAt(int index, int data) {
         Node newNode = new Node(data);
         Node current = this.head;
@@ -89,6 +106,14 @@ public class MyList {
 
     public void deleteNodeAt(int index) {
         Node current = this.head;
+        if (index == 0) {
+            deleteHead();
+            return;
+        }
+        if(index == this.length - 1) {
+            deleteTail();
+            return;
+        }
         int i = 0;
         while(i < index - 1) {
             i++;
@@ -98,6 +123,25 @@ public class MyList {
         current.next = current.next.next;
         temp = null;
         this.length--;
+    }
+
+    public void deleteNode(Node node) {
+        Node current = this.head;
+        if(node == this.head) {
+            deleteHead();
+            return;
+        }
+        while(current.next.next != node) {
+            current = current.next;
+        }
+
+        if(current.next == null) {
+            deleteTail();
+            return;
+        }
+        current.next = node.next;
+        node = null;
+
     }
 
     public void deleteAll() {
@@ -125,6 +169,78 @@ public class MyList {
         }
         current.setData(data);
         return current;
+    }
+
+    public Node findMiddle() {
+        Node current = this.head;
+        int i = 0;
+        while(i < this.length / 2) {
+            i++;
+            current = current.next;
+        }
+        return current;
+    }
+
+    public Node searchByIndex(int index) {
+        int i = 0;
+        if(index < 0 | index > this.length) {
+            return null;
+        }
+        Node current = this.head;
+        while(i < index) {
+            i++;
+            current = current.next;
+        }
+        return current;
+    }
+    public Node searchFromTail(int n) {
+        int index = this.length - n;
+        return searchByIndex(index);
+    }
+
+    public void lastToFront() {
+        Node current = this.head;
+        while(current.next.next != null) {
+            current = current.next;
+        }
+
+        Node temp = current.next;
+        current.next = null;
+        temp.next = this.head;
+        this.head = temp;
+    }
+
+    public void middleToFront() {
+        Node current = this.head;
+        int i = 0;
+        while(i < (this.length % 2 == 0 ? this.length / 2 - 1 : this.length / 2) - 1) {
+            i++;
+            current = current.next;
+        }
+        Node temp = current.next;
+        current.next = current.next.next;
+        temp.next = this.head;
+        this.head = temp;
+    }
+
+    public void deleteAlternative() {
+        int i = 0;
+        Node current = this.head;
+        int count = 0;
+        while(i < (this.length + count - 1)) {
+            if(i % 2 == 0) {
+                Node temp = current.next;
+                current.next = current.next.next;
+                temp = null;
+                this.length--;
+                System.out.println(toString());
+                count++;
+            }
+            else
+                current = current.next;
+            i++;
+        }
+
     }
 
     public String toString() {
