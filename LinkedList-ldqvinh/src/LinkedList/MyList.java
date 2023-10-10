@@ -290,6 +290,38 @@ public class MyList {
         this.reverse();
     }
 
+    public MyList add2Lists(MyList list) {
+        MyList result = new MyList();
+        this.reverse();
+        list.reverse();
+        Node current = this.head;
+        Node listCurrent = list.head;
+        int carry = 0;
+        int sum = 0;
+        while(current != null && listCurrent != null) {
+
+            sum = current.getData() + listCurrent.getData() + carry;
+            if(sum > 9) {
+                carry = sum - 9;
+            }
+            else {
+                carry = 0;
+            }
+            if(sum > 9) {
+                result.addNode(0);
+            }
+            else {
+                result.addNode(sum);
+            }
+
+            current = current.next;
+            listCurrent = listCurrent.next;
+        }
+
+        result.reverse();
+        return result;
+    }
+
     public String toString() {
         String result = "" ;
         Node current = this.head;
