@@ -302,13 +302,13 @@ public class MyList {
 
             sum = current.getData() + listCurrent.getData() + carry;
             if(sum > 9) {
-                carry = sum - 9;
+                carry = 1;
             }
             else {
                 carry = 0;
             }
             if(sum > 9) {
-                result.addNode(0);
+                result.addNode(sum - 10);
             }
             else {
                 result.addNode(sum);
@@ -316,6 +316,9 @@ public class MyList {
 
             current = current.next;
             listCurrent = listCurrent.next;
+        }
+        if(carry > 0) {
+            result.addNode(1);
         }
 
         result.reverse();

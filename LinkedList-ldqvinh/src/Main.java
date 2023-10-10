@@ -18,13 +18,13 @@ public class Main {
 //        list.addNode(8);
 //        list.addNode(9);
 
-        list.addNode(1);
-        list.addNode(2);
+        list.addNode(9);
+        list.addNode(9);
         list.addNode(9);
 
-        list2.addNode(3);
-        list2.addNode(2);
-        list2.addNode(1);
+        list2.addNode(9);
+        list2.addNode(9);
+        list2.addNode(8);
         System.out.println(list.toString() + " | Length: " + list.getLength());
         System.out.println(list2.toString() + " | Length: " + list2.getLength());
         result = list.add2Lists(list2);
