@@ -1,4 +1,6 @@
 package NTNguyen.src;
+
+
 public class LinkedList {
     Node head;
 
