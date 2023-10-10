@@ -240,7 +240,54 @@ public class MyList {
                 current = current.next;
             i++;
         }
+    }
 
+    public void reverse() {
+        Node prev = null;
+        Node current = this.head;
+        Node next = null;
+
+        while(current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        this.head = prev;
+    }
+
+    public void addOne() {
+        this.reverse();
+        Node current = this.head.next;
+        int carry = 0;
+        if(this.head.getData() == 9) {
+            carry += 1;
+            this.head.setData(0);
+        }
+        else {
+            this.head.setData(this.head.getData() + 1);
+        }
+
+
+        while(current.next != null) {
+            if(current.getData() + carry > 9) {
+                carry = 1;
+                current.setData(0);
+            }
+            else {
+                current.setData(current.getData() + carry);
+                carry = 0;
+            }
+
+            current = current.next;
+        }
+        if(current.getData() == 9) {
+            current.setData(0);
+            this.addNode(1);
+        }
+        else
+            current.setData(current.getData() + carry);
+        this.reverse();
     }
 
     public String toString() {
