@@ -34,7 +34,6 @@ public class LinkedList {
 
         this.length++;
     }
-
     public void addNewNode(int data) {
         appendNode(new Node(data));
     }
@@ -81,7 +80,6 @@ public class LinkedList {
 
         return indexNode;
     }
-
     public int searchWithData(int data) {
         Node indexNode  = this.head;
         int result = 0;
@@ -136,49 +134,91 @@ public class LinkedList {
         this.length --;
     }
     public void deleteWithIndex(int index) {
-        if(index > this.length) {
-            System.out.println("out of index");
+//        if(index > this.length) {
+//            System.out.println("out of index");
+//            return;
+//        }
+//
+//        if(this.length == 1) {
+//            this.head.next = null;
+//            this.head = null;
+//            this.length --;
+//            return;
+//        }
+//
+//        if(index == 0) {
+//            Node temp = this.head;
+//            this.head =  this.head.next;
+//            temp.next = null;
+//            this.length--;
+//            return;
+//        }
+//        Node indexNode = this.head;
+//        Node preNode = indexNode;
+//
+//        for(int i = 0; i < index; i++) {
+//            preNode = indexNode;
+//            indexNode = indexNode.next;
+//        }
+//
+//        if(index == this.length) {
+//            preNode = null;
+//            indexNode = null;
+//            this.length--;
+//        } else {
+//            preNode = indexNode.next;
+//            indexNode = null;
+//            this.length--;
+//        }
+        // Check max index
+        if(index >= this.length) {
+            System.out.println("Input value is out of index");
             return;
         }
-
-        if(this.length == 1) {
-            this.head.next = null;
-            this.head = null;
-            this.length --;
-            return;
-        }
-
-        if(index == 0) {
-            Node temp = this.head;
-            this.head =  this.head.next;
-            temp.next = null;
-            this.length--;
-            return;
-        }
+        // Variables set up
         Node indexNode = this.head;
-        Node preNode = indexNode;
+        Node preNode  = indexNode;
 
-        for(int i = 0; i < index; i++) {
+        int loopTimes = index;
+        for(int i = 0; i < loopTimes; i++) {
             preNode = indexNode;
             indexNode = indexNode.next;
         }
 
-        if(index == this.length) {
-            preNode = null;
-            indexNode = null;
-            this.length--;
+        if(index == 0) {
+            Node node = this.head;
+            this.head = head.next;
+            node = null;
         } else {
-            preNode = indexNode.next;
+            preNode.next = indexNode.next;
             indexNode = null;
-            this.length--;
         }
+        this.length--;
+    }
+    public void deleteAll() {
+        Node afNode = this.head;
+
+        while(this.head != null) {
+            afNode = this.head.next;
+            this.head = null;
+            this.head = afNode;
+        }
+        this.length = 0;
+    }
+
+    public boolean checkIndexOutOfRange(int index) {
+        return (index >= this.length || index < 0);
+    }
+
+    public boolean checkEmpty() {
+        return (this.length == 0);
     }
     public void print() {
         Node indexNode = this.head;
         System.out.print("LinkedList: ");
-        while(indexNode != null) {
-            System.out.print(indexNode.data + " - ");
 
+        while( indexNode != null) {
+            System.out.print(indexNode.data + " - ");
             indexNode = indexNode.next;
         }
         System.out.print("\n");
@@ -210,12 +250,16 @@ public class LinkedList {
 
         System.out.println("-- Delete --");
 
-//        list.print();
+        list.print();
+        System.out.println("-- Head + Tail --");
         list.deleteHead();
         list.deleteTail();
         list.print();
-        list.deleteWithIndex(3);
+        System.out.println("-- At Index --");
+        list.deleteWithIndex(2);
         list.print();
-
+        System.out.println("-- All --");
+        list.deleteAll();
+        list.print();
     }
 }
