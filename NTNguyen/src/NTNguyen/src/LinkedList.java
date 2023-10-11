@@ -49,10 +49,31 @@ public class LinkedList {
 
     // This function used to add a node after a given node
     // in the middle of the list.
-    Node insertAfterGiven (int num, Node prev_node) {
+    Node insertBeforeGiven (int num, int index) {
         Node newNode = new Node(num);
-        newNode.next = prev_node.next;
-        prev_node.next = newNode;
+        Node temp = head;
+        Node prev = head;
+        for (int i = 0; i < index; i++){
+
+
+
+            // Insert at 1st position, assign head to new node
+            if (i == 0 && index == 1){
+                newNode.next = head;
+                head = newNode;
+
+            }
+            else {
+                if (i == index - 1) {
+                    prev.next = newNode;
+                    newNode.next = temp;
+                }
+
+            }
+            prev = temp;
+            temp = temp.next;
+
+        }
         return newNode;
     }
     //endregion
@@ -66,6 +87,7 @@ public class LinkedList {
     void deleteHead () {
         Node temp = head;
         head = head.next;
+
     }
     //endregion
 
@@ -86,17 +108,21 @@ public class LinkedList {
     //endregion
 
     // This function used to Delete given node.
-    void deleteGivenNode(Node givenNode) {
+    void deleteGivenIndex(int index) {
         Node current = head;
         Node prev = current;
-        while(current != givenNode) {
+        if (index == 1) {
+            deleteHead();
+        }
+        for (int i = 0; i < index; i++) {
+            if (i == index - 1) {
+                prev.next = current.next;
+                current.next = null;
+                return;
+            }
             prev = current;
             current = current.next;
         }
-
-        current = givenNode.next;
-
-        prev.next = current;
 
 
     }
@@ -115,14 +141,14 @@ public class LinkedList {
     //endregion
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
-        Node node1 = list.addNodeHead(10);
-        Node node2 = list.addNodeTail(20);
-        Node node3 = list.addNodeTail(25);
-        Node node4 = list.insertAfterGiven(15, node1);
-        Node node5 = list.insertAfterGiven(30, node2);
-        list.deleteHead();
-        list.deleteLast();
-        list.deleteGivenNode(node2);
+        list.addNodeHead(10);
+        list.addNodeTail(20);
+        list.addNodeTail(25);
+        list.insertBeforeGiven(9995, 2);
+        list.insertBeforeGiven(30, 4);
+//        list.deleteHead();
+//        list.deleteLast();
+        list.deleteGivenIndex(5);
         list.printList();
 
     }
