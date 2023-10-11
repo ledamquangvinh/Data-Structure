@@ -92,7 +92,6 @@ public class LinkedList {
     //endregion
 
     //region DELETE LAST
-
     // This function used to Delete node at the end.
     void deleteLast() {
         Node last = head;
@@ -102,12 +101,11 @@ public class LinkedList {
             last = last.next;
         }
         prev.next = null;
-
     }
-
     //endregion
 
-    // This function used to Delete given node.
+    //region DELETE GIVEN INDEX
+    // This function used to Delete a node at given index.
     void deleteGivenIndex(int index) {
         Node current = head;
         Node prev = current;
@@ -123,11 +121,38 @@ public class LinkedList {
             prev = current;
             current = current.next;
         }
-
-
     }
+    //endregion
 
     //endregion
+
+    // This function used to update node data at given index
+    public void updateData (int newData, int index) {
+        Node temp = head;
+        for (int i = 0; i < index; i++) {
+            if (i == index - 1) {
+                temp.data = newData;
+                return;
+            }
+            temp = temp.next;
+        }
+    }
+
+    // This function used to reverse the list
+    void reverseList () {
+        Node current = head;
+        Node prev = null;
+        Node next = current;
+
+
+        while (next != null) {
+            current = next;
+            next = next.next;
+            current.next = prev;
+            prev = current;
+        }
+        head = current;
+    }
 
     //region PRINT THE LIST
     // This function used to print the list
@@ -141,14 +166,18 @@ public class LinkedList {
     //endregion
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
+
         list.addNodeHead(10);
         list.addNodeTail(20);
         list.addNodeTail(25);
-        list.insertBeforeGiven(9995, 2);
-        list.insertBeforeGiven(30, 4);
+        list.printList();
+//        list.insertBeforeGiven(9995, 2);
+//        list.insertBeforeGiven(30, 4);
 //        list.deleteHead();
 //        list.deleteLast();
-        list.deleteGivenIndex(5);
+//        list.deleteGivenIndex(5);
+//        list.updateData(555, 2);
+        list.reverseList();
         list.printList();
 
     }
