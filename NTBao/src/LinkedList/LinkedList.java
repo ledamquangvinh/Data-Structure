@@ -48,19 +48,21 @@ public class LinkedList {
 
         for(int i = 0; i < index; i++) {
             preNode = indexNode;
-            indexNode = indexNode.next;
+             indexNode = indexNode.next;
         }
 
         if(indexNode == null) {
+            // Empty List
             preNode.next = appendNode;
             appendNode.next = null;
         } else {
             if(index == 0) {
-                System.out.println("11111111");
+                // Index == 0, add node to head
                 appendNode.next = this.head;
                 this.head = appendNode;
                 return;
             }
+            // Add node in middle
             preNode.next = appendNode;
             appendNode.next = indexNode;
         }
@@ -205,11 +207,51 @@ public class LinkedList {
         }
         this.length = 0;
     }
+    public void updateAtIndex(int data, int index) {
+        if(checkEmpty()) {
+            System.out.println("The List is empty");
+            return;
+        }
+        if(checkIndexOutOfRange(index)) {
+            System.out.println("Update: Index out of range");
+            return;
+        }
 
+        if(index == 0) {
+            this.head.data = data;
+            return;
+        }
+
+        Node indexNode = this.head;
+        for(int i = 0; i < index; i++) {
+             indexNode = indexNode.next;
+        }
+
+        indexNode.data = data;
+    }
+    public void reverse() {
+        if(checkEmpty()) {
+            System.out.println("The List is empty");
+            return;
+        }
+
+        if(this.length == 1) {return;}
+
+        Node indexNode = this.head;
+        Node preNode = null;
+        Node nextNode = null;
+        while(indexNode != null) {
+            nextNode = indexNode.next;
+            indexNode.next = preNode;
+            preNode = indexNode;
+            indexNode = nextNode;
+        }
+
+        this.head = preNode;
+    }
     public boolean checkIndexOutOfRange(int index) {
         return (index >= this.length || index < 0);
     }
-
     public boolean checkEmpty() {
         return (this.length == 0);
     }
@@ -245,7 +287,7 @@ public class LinkedList {
 
         Node node3 = new Node(999);
         list.print();
-        list.appendWithIndex(4, node3);
+        list.appendWithIndex(1, node3);
         list.print();
 
         System.out.println("-- Delete --");
@@ -260,6 +302,19 @@ public class LinkedList {
         list.print();
         System.out.println("-- All --");
         list.deleteAll();
+        list.print();
+
+        System.out.println("-- Update --");
+        list.addNewNode(11);
+        list.addNewNode(22);
+        list.addNewNode(33);
+        list.print();
+        list.updateAtIndex(999999, 3);
+        list.print();
+
+        System.out.println("-- Reverse --");
+        list.print();
+        list.reverse();
         list.print();
     }
 }
